@@ -35,27 +35,8 @@
       }
     ) // {
     nixosConfigurations = {
-      base = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-	  ./configuration.nix
-          disko.nixosModules.disko
-          ./disko.nix
-          (import "${customModules}/modules/basepackages.nix")
-        ];
-      };
-
-      graphical = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-	modules = [
-	  ./configuration.nix
-          disko.nixosModules.disko
-          ./disko.nix
-          (import "${customModules}/modules/basepackages.nix")
-          (import "${customModules}/modules/wm.nix")
-          (import "${customModules}/modules/guipackages.nix")
-	];
-      };
+      base = import ./nixos/base.nix { inherit inputs; system = "x86_64-linux"; };
+      graphical = import ./nixos/graphical.nix { inherit inputs; system = "x86_64-linux"; };
     };
   };
 }
