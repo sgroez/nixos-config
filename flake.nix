@@ -15,21 +15,23 @@
           inherit system;
           config.allowUnfree = true;
         };
-      in {
-        packages.installScript = pkgs.writeShellScriptBin "install-nixos" ''
+
+	makeInstallScript = configName: ''
           set -e
-
-          echo "[1/4] Running disko..."
+          echo "Partitioning..."
           nix run ${disko}/#disko -- --mode disko ./disko.nix
-
-          echo "[2/4] Mounting partitions..."
+          echo "Mounting..."
           nix run ${disko}/#disko -- --mode mount ./disko.nix
-
-          echo "[3/4] Installing NixOS..."
-          nixos-install --flake .
-
-          echo "[4/4] Done!"
+          echo "Installing NixOS..."
+          nixos-install --flake "${PWD}#${configName}" --no-root-password
+          echo "Install complete!"
         '';
+      in {
+        # Installation scripts for each host
+        packages = {
+          install-base = pkgs.writeShellScriptBin "install-base" (makeInstallScript "base");
+          install-graphical = pkgs.writeShellScriptBin "install-graphical" (makeInstallScript "graphical");
+        };
       }
     ) // {
     nixosConfigurations = {
@@ -37,7 +39,9 @@
         system = "x86_64-linux";
         modules = [
 	  ./configuration.nix
-          "${customModules}/modules/basepackages.nix"
+          disko.nixosModules.disko
+          ./disko.nix
+          (import "${customModules}/modules/basepackages.nix")
         ];
       };
 
@@ -45,9 +49,11 @@
         system = "x86_64-linux";
 	modules = [
 	  ./configuration.nix
-          "${customModules}/modules/basepackages.nix"
-          "${customModules}/modules/wm.nix"
-          "${customModules}/modules/guipackages.nix"
+          disko.nixosModules.disko
+          ./disko.nix
+          (import "${customModules}/modules/basepackages.nix")
+          (import "${customModules}/modules/wm.nix")
+          (import "${customModules}/modules/guipackages.nix")
 	];
       };
     };

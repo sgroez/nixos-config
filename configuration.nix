@@ -2,8 +2,8 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  nixpkgs.config.allowUnfree = true;
   system.stateVersion = "25.05";
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   time.timeZone = "Europe/Berlin";
   i18n.defaultLocale = "en_US.UTF8";
@@ -25,8 +25,6 @@
   };
 
   console.keyMap = "de";
-
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   #TODO change username to your desired username and set password using cmdline
   users.users.username = {
