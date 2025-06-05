@@ -7,11 +7,11 @@
     customModules.url = "github:sgroez/nixos-config";
   };
 
-  outputs = { self, nixpkgs, flake-utils, inputs }:
+  outputs = { self, nixpkgs, flake-utils, customModules }:
     flake-utils.lib.eachSystem [ "x86_64-linux" "aarch64-linux" ] (system: {
       nixosConfigurations = {
-        base = import ./nixos/base.nix { inherit inputs; system = "x86_64-linux"; };
-        graphical = import ./nixos/graphical.nix { inherit inputs; system = "x86_64-linux"; };
+        base = import ./nixos/base.nix { system = "x86_64-linux"; inherit customModules; };
+        graphical = import ./nixos/graphical.nix { system = "x86_64-linux"; inherit customModules; };
       };
     });
   }

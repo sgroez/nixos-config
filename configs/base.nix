@@ -1,7 +1,7 @@
-{ inputs, system }:inputs.nixpkgs.lib.nixosSystem {
+{ system, customModules }:inputs.nixpkgs.lib.nixosSystem {
   inherit system;
   modules = [
     ../shared/configuration.nix
-    (import "${inputs.customModules}/modules/basepackages.nix")
+    (import "${customModules}/basepackages.nix")
   ];
 }
