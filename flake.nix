@@ -38,7 +38,10 @@
           isNormalUser = true;
           extraGroups = [ "wheel" ];
           password = "password";
-	};
+          openssh.authorizedKeys.keys = [
+            "your ssh public key"
+          ];
+        };
 
         #TODO change hostname to your hostname
         networking.hostName = "hostname";
@@ -54,12 +57,10 @@
           group = "root";
         };
 
-        #TODO add your personal public key to authorized keys
+        #TODO disable openssh if not needed
         services.openssh.enable = true;
         services.openssh.settings.PasswordAuthentication = false;
-        users.users.root.openssh.authorizedKeys.keys = [
-          "your ssh public key"
-        ];
+        services.openssh.PermitRootLogin = "no";
       };
     in {
       nixosConfigurations = {
@@ -69,7 +70,7 @@
             ({ config, modulesPath, ... }: {
               imports = [ (modulesPath + "/installer/cd-dvd/installation-cd-minimal.nix") ];
 
-	      # special boot options for broadcom wireless card
+              # special boot options for broadcom wireless card
               boot.kernelModules = [ "wl" ];
               boot.extraModulePackages = with config.boot.kernelPackages; [ broadcom_sta ];
               boot.blacklistedKernelModules = [ "b43" "bcma" ];
