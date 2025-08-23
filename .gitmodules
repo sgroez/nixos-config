@@ -1,3 +1,0 @@
-[submodule "nixos-modules"]
-	path = nixos-modules
-	url = https://github.com/sgroez/nixos-modules.git
