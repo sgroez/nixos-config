@@ -3,6 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ../../users/sim.nix
     ../../modules/desktop.nix
   ];
 

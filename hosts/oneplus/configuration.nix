@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ../../users/sim.nix
     ../../modules/gui.nix
   ];
 
