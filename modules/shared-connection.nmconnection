@@ -1,0 +1,10 @@
+[connection]
+id=ethernet-shared
+type=ethernet
+autoconnect=true
+
+[ipv4]
+method=shared
+
+[ipv6]
+method=ignore
