@@ -44,17 +44,23 @@ to build x86 iso run:
 nix build .#nixosConfigurations.x86Iso.config.system.build.isoImage
 ```
 
-## how to write sdimage to sd card with zst decompression
-1. make sure you know what the device path is using the following command
-    searching for the device with matching capacity and format of the medium you want to use
-    or check which device appears on connecting
-    ```
-    lsblk
-    ```
-2. change the following comand of=/dev/sdX to match your device path and run the command
-    ```
-    zstd -d --stdout ./result/sd-image/nixos-image-sd-card-*.img.zst | sudo dd of=/dev/sdX bs=4M status=progress conv=fsync
-    ```
+## how to write to external storage (sd or usb)
+1\. make sure you know what the device path is using the following command searching for the device with matching capacity and format of the medium you want to use or check which device appears on connecting
+```
+lsblk
+```
+    
+### how to write sdimage to sd card with zst decompression
+2a. change the following command of=/dev/sdX to match your device path and run the command
+```
+zstd -d --stdout ./result/sd-image/nixos-image-sd-card-*.img.zst | sudo dd of=/dev/sdX bs=4M status=progress conv=fsync
+```
+
+### how to write iso to usb drive
+2b. change the following command of=/dev/sdX to match your device path and run the command
+```
+dd if=./result/iso/nixos-minimal-*.iso of=/dev/sdX bs=4M status=progress oflag=sync
+```
 
 ###TODO add how to remote deploy with password encrypted ssh private key file
 
