@@ -24,6 +24,7 @@
         system = "aarch64-linux";
         modules = [
           (import "${mobile-nixos}/lib/configuration.nix" { device = "oneplus-enchilada"; })
+          ({ nixpkgs.config.allowUnfree = true; })
           ./hosts/oneplus/configuration.nix
         ];
       };
