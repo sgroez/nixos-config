@@ -1,5 +1,5 @@
 {
-  imports [
+  imports = [
     ./base.nix
     ./gui/wm.nix
     ./gui/guipackages.nix
