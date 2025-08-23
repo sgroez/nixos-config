@@ -2,9 +2,7 @@
 
 {
   imports = [
-    ../shared.nix
-    ../wm.nix
-    ../guipackages.nix
+    ../../modules/gui.nix
   ];
 
   # This value determines the NixOS release from which the default

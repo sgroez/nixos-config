@@ -3,11 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../shared.nix
-    ../../modules/wm.nix
-    ../../modules/guipackages.nix
-    ../../modules/multimedia.nix
-    ../../modules/gaming.nix
+    ../../modules/desktop.nix
   ];
 
   # Bootloader.
