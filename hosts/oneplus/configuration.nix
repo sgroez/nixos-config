@@ -2,21 +2,10 @@
 
 {
   imports = [
-    ./hardware-configuration.nix
     ../shared.nix
-    ../../modules/wm.nix
-    ../../modules/guipackages.nix
-    ../../modules/multimedia.nix
-    ../../modules/gaming.nix
+    ../wm.nix
+    ../guipackages.nix
   ];
-
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  boot.initrd.luks.devices."luks-ff1ba414-b92f-4d26-8349-c85d36cf5191".device = "/dev/disk/by-uuid/ff1ba414-b92f-4d26-8349-c85d36cf5191";
-
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
