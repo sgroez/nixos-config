@@ -1,5 +1,5 @@
 {
-  imports [
+  imports = [
     ./base/locales.nix
     ./base/basepackages.nix
     ./base/powermanagement.nix
