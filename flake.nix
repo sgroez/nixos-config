@@ -11,7 +11,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, ... }: {
+  outputs = { self, nixpkgs, mobile-nixos, ... }: {
     nixosConfigurations = {
       thinkpad = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -33,7 +33,8 @@
         modules = [
           ({ config, modulesPath, ... }: {
             imports = [ (modulesPath + "/installer/cd-dvd/installation-cd-minimal.nix") ];
-            ./hosts/xeondesktop/configuration.nix
+          })
+          ./hosts/xeondesktop/configuration.nix
         ];
       };
 
