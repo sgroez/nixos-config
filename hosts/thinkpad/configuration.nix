@@ -5,6 +5,7 @@
     ./hardware-configuration.nix
     ../../users/sim.nix
     ../../modules/desktop.nix
+    ../../modueles/extra/bluetooth.nix
   ];
 
   # Bootloader.

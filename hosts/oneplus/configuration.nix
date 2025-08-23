@@ -4,9 +4,12 @@
   imports = [
     ../../users/sim.nix
     ../../modules/gui.nix
+    ../../modules/extra/bluetooth.nix
   ];
 
   nixpkgs.config.allowUnfree = true;
+
+  services.getty.autologinUser = "sim";
 
   # Enable SSH server (essential for mobile device access)
   networking.firewall.allowedTCPPorts = [ 22 ];
