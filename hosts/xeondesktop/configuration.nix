@@ -10,4 +10,6 @@
   boot.kernelModules = [ "wl" ];
   boot.extraModulePackages = with config.boot.kernelPackages; [ broadcom_sta ];
   boot.blacklistedKernelModules = [ "b43" "bcma" ];
+
+  networking.hostName = "xeondesktop";
 }

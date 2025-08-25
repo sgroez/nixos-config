@@ -10,6 +10,7 @@
   nixpkgs.config.allowUnfree = true;
 
   services.getty.autologinUser = "sim";
+  networking.hostName = "oneplus";
 
   # Enable SSH server (essential for mobile device access)
   networking.firewall.allowedTCPPorts = [ 22 ];
