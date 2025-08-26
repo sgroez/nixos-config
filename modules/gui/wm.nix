@@ -5,6 +5,6 @@
     brightnessctl
     pavucontrol
     fuzzel
-    waybar
+    quickshell
   ];
 }
