@@ -6,5 +6,7 @@
     pavucontrol
     fuzzel
     quickshell
+    hyprlandPlugins.hyprgrass
+    iio-hyprland
   ];
 }
