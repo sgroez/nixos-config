@@ -1,5 +1,6 @@
 { pkgs, ... }: {
   programs.hyprland.enable = true;
+  programs.iio-hyprland.enable = true;
 
   services.upower.enable = true;
 
@@ -9,6 +10,5 @@
     fuzzel
     quickshell
     hyprlandPlugins.hyprgrass
-    iio-hyprland
   ];
 }
