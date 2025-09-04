@@ -7,6 +7,7 @@
     ../../modules/desktop.nix
     ../../modules/extra/bluetooth.nix
     ../../modules/extra/chrome.nix
+    ../../modules/extra/java.nix
   ];
 
   # Bootloader.
