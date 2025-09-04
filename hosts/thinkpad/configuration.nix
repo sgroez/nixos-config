@@ -6,6 +6,7 @@
     ../../users/sim.nix
     ../../modules/desktop.nix
     ../../modules/extra/bluetooth.nix
+    ../../modules/extra/chrome.nix
   ];
 
   # Bootloader.
