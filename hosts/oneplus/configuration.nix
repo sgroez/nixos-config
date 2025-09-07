@@ -8,7 +8,6 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  services.getty.autologinUser = "sim";
   networking.hostName = "oneplus";
 
   # Enable GNOME Desktop Environment
