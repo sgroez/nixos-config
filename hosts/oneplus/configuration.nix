@@ -11,9 +11,6 @@
 
   networking.hostName = "oneplus";
 
-  # Disable cpufreq to avoid error with gnome power profile management
-  services.auto-cpufreq.enable = false;
-
   # Enable GNOME Desktop Environment
   services.xserver.enable = true;
   services.desktopManager.gnome.enable = true;

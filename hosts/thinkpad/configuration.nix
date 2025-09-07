@@ -8,6 +8,7 @@
     ../../modules/extra/bluetooth.nix
     ../../modules/extra/chrome.nix
     ../../modules/extra/java.nix
+    ../../modules/extra/powermanagement.nix
   ];
 
   # Bootloader.
