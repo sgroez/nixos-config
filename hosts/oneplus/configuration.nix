@@ -11,6 +11,7 @@
 
   services.getty.autologinUser = "sim";
   networking.hostName = "oneplus";
+  networking.modemmanager.enable = true;
 
   # Enable SSH server (essential for mobile device access)
   networking.firewall.allowedTCPPorts = [ 22 ];
