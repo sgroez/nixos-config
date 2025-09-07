@@ -13,6 +13,7 @@
   networking.hostName = "oneplus";
    environment.systemPackages = [
     pkgs.calls
+    pkgs.chatty
   ];
 
   networking.modemmanager.enable = true;
