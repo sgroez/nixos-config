@@ -11,6 +11,9 @@
 
   services.getty.autologinUser = "sim";
   networking.hostName = "oneplus";
+   environment.systemPackages = [
+    pkgs.calls
+  ];
 
   networking.modemmanager.enable = true;
   systemd.services.ModemManager.enable = true;
