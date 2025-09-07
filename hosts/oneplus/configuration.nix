@@ -3,6 +3,7 @@
 {
   imports = [
     ../../users/sim.nix
+    ../../modules/base.nix
     ../../modules/extra/bluetooth.nix
   ];
 
