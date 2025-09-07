@@ -37,6 +37,10 @@
     gnome-system-monitor gnome-weather gnome-disk-utility pkgs.gnome-connections
   ];
 
+  environment.systemPackages = [
+    pkgs.mobile-broadband-provider-info
+  ];
+
   networking.modemmanager.enable = true;
   systemd.services.ModemManager.enable = true;
 
