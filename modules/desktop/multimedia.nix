@@ -3,5 +3,6 @@
     gimp
     blender
     audacity
+    pdftricks
   ];
 }
