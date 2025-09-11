@@ -5,9 +5,7 @@
     ./hardware-configuration.nix
     ../../users/sim.nix
     ../../modules/desktop.nix
-    ../../modules/extra/bluetooth.nix
     ../../modules/extra/chrome.nix
-    ../../modules/extra/java.nix
     ../../modules/extra/powermanagement.nix
   ];
 
