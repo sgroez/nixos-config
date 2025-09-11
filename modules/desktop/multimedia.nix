@@ -4,5 +4,6 @@
     blender
     audacity
     pdftricks
+    imagemagick
   ];
 }
