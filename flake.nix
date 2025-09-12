@@ -9,14 +9,24 @@
       url = "github:mobile-nixos/mobile-nixos";
       flake = false; # We import it directly, not as a flake
     };
+    wvkbd-compact.url = "github:sgroez/wvkbd-compact";
   };
 
-  outputs = { self, nixpkgs, mobile-nixos, ... }: {
+  outputs = { self, nixpkgs, mobile-nixos, wvkbd-compact, ... }: {
     nixosConfigurations = {
       thinkpad = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           ./hosts/thinkpad/configuration.nix
+          ({
+            config,
+            pkgs,
+            ...
+          }: {
+            environment.systemPackages = with pkgs; [
+              wvkbd-compact.packages.${system}.default
+            ];
+          })
         ];
       };
 

@@ -7,7 +7,6 @@
     ../../modules/desktop.nix
     ../../modules/extra/chrome.nix
     ../../modules/extra/powermanagement.nix
-    ../../modules/extra/wvkbd-compact.nix
   ];
 
   # Bootloader.
