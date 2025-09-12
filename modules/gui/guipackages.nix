@@ -1,6 +1,5 @@
 { pkgs, ... }: {
   environment.systemPackages = with pkgs; [
-    wvkbd
     firefox
     yubioath-flutter
   ];
