@@ -21,11 +21,11 @@
     "mobile-nixos": {
       "flake": false,
       "locked": {
-        "lastModified": 1756053156,
-        "narHash": "sha256-S3Hc9YfNg2uZV6OKnJw6LZMj0l+Di8i0DqdMo+cYdd4=",
+        "lastModified": 1757174863,
+        "narHash": "sha256-PFu4TTHm/GSbrBBl6waxSNyQfpMoC4YkL1RMXkb2gyE=",
         "owner": "mobile-nixos",
         "repo": "mobile-nixos",
-        "rev": "a47b88eee1b5c5f61f6f8f377592fee06b8933ab",
+        "rev": "c3164daaf62a81d0c4bfab67e6763a4319212557",
         "type": "github"
       },
       "original": {
@@ -36,11 +36,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1756266583,
-        "narHash": "sha256-cr748nSmpfvnhqSXPiCfUPxRz2FJnvf/RjJGvFfaCsM=",
+        "lastModified": 1757745802,
+        "narHash": "sha256-hLEO2TPj55KcUFUU1vgtHE9UEIOjRcH/4QbmfHNF820=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "8a6d5427d99ec71c64f0b93d45778c889005d9c2",
+        "rev": "c23193b943c6c689d70ee98ce3128239ed9e32d1",
         "type": "github"
       },
       "original": {
@@ -52,11 +52,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1757487488,
-        "narHash": "sha256-zwE/e7CuPJUWKdvvTCB7iunV4E/+G0lKfv4kk/5Izdg=",
+        "lastModified": 1757745802,
+        "narHash": "sha256-hLEO2TPj55KcUFUU1vgtHE9UEIOjRcH/4QbmfHNF820=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "ab0f3607a6c7486ea22229b92ed2d355f1482ee0",
+        "rev": "c23193b943c6c689d70ee98ce3128239ed9e32d1",
         "type": "github"
       },
       "original": {
@@ -94,15 +94,16 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1757676356,
-        "narHash": "sha256-uX2xMzqEBkXsFrlxXM/3EE+42kgTAhR2crv120T92Cs=",
+        "lastModified": 1757938720,
+        "narHash": "sha256-vqWhO3Owo+w5N2dHqhT5cvTOlIeiYZLrpNpec+BLi3c=",
         "owner": "sgroez",
         "repo": "wvkbd-compact",
-        "rev": "a414ce0e895576af120571cb1dda699a381fbd8c",
+        "rev": "e7466e865bc03d233ae05b54d7ccacb4a25cd274",
         "type": "github"
       },
       "original": {
         "owner": "sgroez",
+        "ref": "feature/compact-layout",
         "repo": "wvkbd-compact",
         "type": "github"
       }

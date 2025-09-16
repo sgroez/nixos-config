@@ -9,7 +9,7 @@
       url = "github:mobile-nixos/mobile-nixos";
       flake = false; # We import it directly, not as a flake
     };
-    wvkbd-compact.url = "github:sgroez/wvkbd-compact";
+    wvkbd-compact.url = "github:sgroez/wvkbd-compact/feature/compact-layout";
   };
 
   outputs = { self, nixpkgs, mobile-nixos, wvkbd-compact, ... }: {
