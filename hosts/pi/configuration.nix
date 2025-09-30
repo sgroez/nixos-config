@@ -1,4 +1,10 @@
 {
+
+  imports = [
+    ../../modules/base.nix
+    ../../modules/extra/powermanagement.nix
+  ];
+
   fileSystems."/" = {
     device = "/dev/disk/by-label/NIXOS_SD";
     fsType = "ext4";
