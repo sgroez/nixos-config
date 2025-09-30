@@ -9,7 +9,6 @@
     ];
   };
 
-  networking.hostName = "remote-nixos";
   networking.wireless.enable = false;
   networking.networkmanager.enable = true;
   networking.firewall.enable = true;
@@ -24,5 +23,5 @@
 
   services.openssh.enable = true;
   services.openssh.settings.PasswordAuthentication = false;
-  services.openssh.PermitRootLogin = "no";
+  services.openssh.settings.PermitRootLogin = "no";
 }
