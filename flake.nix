@@ -60,6 +60,13 @@
         modules = [
           ({ modulesPath, ... }: {
             imports = [ (modulesPath + "/installer/sd-card/sd-image-aarch64.nix") ];
+
+            environment.etc."NetworkManager/system-connections/ssid.nmconnection" = {
+              source = ~/Documents/ssid.nmconnection;
+              mode = "0600";
+              user = "root";
+              group = "root";
+            };
           })
           ./hosts/pi/configuration.nix
         ];

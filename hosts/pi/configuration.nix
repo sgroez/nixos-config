@@ -14,7 +14,6 @@
   boot.loader.grub.enable = false; # Not needed on ARM either
   boot.loader.generic-extlinux-compatible.enable = true;
 
-
   #TODO Add your ssh public key for ssh auth and set password after first boot using cmdline
   users.users.pi = {
     isNormalUser = true;
@@ -30,12 +29,6 @@
   networking.networkmanager.enable = true;
   networking.firewall.enable = true;
 
-  environment.etc."NetworkManager/system-connections/ssid.nmconnection" = {
-    source = ~/Documents/ssid.nmconnection;
-    mode = "0600";
-    user = "root";
-    group = "root";
-  };
 
   services.openssh.enable = true;
   services.openssh.settings.PermitRootLogin = "no";
