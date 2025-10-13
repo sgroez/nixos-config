@@ -1,0 +1,24 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+    compatible = "brcm,bcm2835";
+
+    fragment@0 {
+        target-path = "/";
+        __overlay__ {
+            gpio_keys {
+                compatible = "gpio-keys";
+                #address-cells = <1>;
+                #size-cells = <0>;
+
+                key_a {
+                    label = "key_a";
+                    linux,code = <KEY_A>;
+                    gpios = <&gpio 4 GPIO_ACTIVE_LOW>;
+                };
+            };
+        };
+    };
+};
+
