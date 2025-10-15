@@ -1,27 +1,66 @@
-{
+# inspired by github.com/plmercereau/nixos-pi-zero-2
+{ config, pkgs, lib, ... }: {
 
   imports = [
+    ./hardware-configuration.nix
     ../../modules/base.nix
     ../../modules/extra/powermanagement.nix
   ];
 
-  fileSystems."/" = {
-    device = "/dev/disk/by-label/NIXOS_SD";
-    fsType = "ext4";
+  boot = {
+    kernelPackages = pkgs.linuxPackages_rpi02w;
+    initrd.availableKernelModules = [
+      "xhci_pci"
+      "usbhid"
+      "usb_storage"
+    ];
+    loader = {
+      systemd-boot.enable = false;
+      grub.enable = false; # Not needed on ARM either
+      generic-extlinux-compatible.enable = true;
+    };
+    swraid.enable = lib.mkForce false;
   };
 
-  boot.loader.systemd-boot.enable = false;
-  boot.loader.grub.enable = false; # Not needed on ARM either
-  boot.loader.generic-extlinux-compatible.enable = true;
+  nixpkgs.hostPlatform = "aarch64-linux";
+  system.stateVersion = "25.05";
 
-  #TODO Add your ssh public key for ssh auth and set password after first boot using cmdline
-  users.users.pi = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ];
-    initialPassword = "password";
-    openssh.authorizedKeys.keys = [
-      "your ssh public key"
-    ];
+  # Some packages (ahci fail... this bypasses that) https://discourse.nixos.org/t/does-pkgs-linuxpackages-rpi3-build-all-required-kernel-modules/42509
+  nixpkgs.overlays = [
+    (final: super: {
+      makeModulesClosure = x: super.makeModulesClosure (x // { allowMissing = true; });
+    })
+  ];
+
+  users.users = {
+    pi = {
+      isNormalUser = true;
+      extraGroups = [ "wheel" ];
+      initialPassword = "password";
+      openssh.authorizedKeys.keys = [
+        (builtins.readFile ~/.ssh/id_ed25519.pub)
+      ];
+    };
+    root = {
+      hashedPassword = "*";
+      openssh.authorizedKeys.keys = [
+        (builtins.readFile ~/.ssh/id_ed25519.pub)
+      ];
+    };
+  };
+
+  environment.etc."NetworkManager/system-connections/groezbox.nmconnection" = {
+    source = ~/secrets/groezbox.nmconnection;
+    mode = "0600";
+    user = "root";
+    group = "root";
+  };
+
+  environment.etc."NetworkManager/system-connections/groezbox2.nmconnection" = {
+    source = ~/secrets/groezbox2.nmconnection;
+    mode = "0600";
+    user = "root";
+    group = "root";
   };
 
   networking.hostName = "pi";
@@ -31,8 +70,6 @@
 
 
   services.openssh.enable = true;
-  services.openssh.settings.PermitRootLogin = "no";
+  services.openssh.settings.PermitRootLogin = "yes";
   services.openssh.settings.PasswordAuthentication = false;
-
-  system.stateVersion = "25.05";
 }
