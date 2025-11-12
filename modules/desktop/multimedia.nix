@@ -7,6 +7,7 @@
     audacity
     pdftricks
     imagemagick
-    kicad-unstable
+    kicad
+    exiftool
   ];
 }

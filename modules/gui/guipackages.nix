@@ -3,6 +3,7 @@
     firefox
     yubioath-flutter
     element-desktop
+    hyprshot
   ];
 
   services.pcscd.enable = true;
