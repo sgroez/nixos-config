@@ -2,7 +2,6 @@
   environment.systemPackages = with pkgs; [
     firefox
     yubioath-flutter
-    element-desktop
     hyprshot
   ];
 
