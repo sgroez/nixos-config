@@ -8,6 +8,7 @@
     pdftricks
     imagemagick
     kicad
-    exiftool
+    cmus
+    gthumb
   ];
 }
