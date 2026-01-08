@@ -3,9 +3,13 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    # darwin for mac configuration
+    nix-darwin.url = "github:nix-darwin/nix-darwin/master";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, ... }: {
+  outputs = { self, nix-darwin, nixpkgs, ... }: {
     nixosConfigurations = {
       thinkpad = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -31,6 +35,13 @@
         ];
       };
     };
+
+    darwinConfigurations = {
+      mac = nix-darwin.lib.darwinSystem {
+        modules = [ ./hosts/mac/configuration.nix ];
+      };
+    };
+
   };
 }
 
