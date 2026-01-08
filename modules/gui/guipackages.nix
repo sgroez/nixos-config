@@ -1,5 +1,6 @@
 { pkgs, ... }: {
   environment.systemPackages = with pkgs; [
+    kitty
     firefox
     yubioath-flutter
     hyprshot
