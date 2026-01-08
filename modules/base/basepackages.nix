@@ -6,5 +6,6 @@
     stow
     neovim
     tealdeer
+    cmus
   ];
 }

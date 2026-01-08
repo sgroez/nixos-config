@@ -8,7 +8,6 @@
     pdftricks
     imagemagick
     kicad
-    cmus
     gthumb
   ];
 }
