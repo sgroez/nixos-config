@@ -3,9 +3,8 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/desktop.nix
+    ../../modules/base.nix
     ../../modules/extra/powermanagement.nix
-    ../../modules/extra/huaweiusbmodem.nix
   ];
 
   # Bootloader.
@@ -14,10 +13,7 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-
     initrd.luks.devices."luks-ff1ba414-b92f-4d26-8349-c85d36cf5191".device = "/dev/disk/by-uuid/ff1ba414-b92f-4d26-8349-c85d36cf5191";
-
-    binfmt.emulatedSystems = [ "aarch64-linux" ];
   };
 
   users.users.sim = {
