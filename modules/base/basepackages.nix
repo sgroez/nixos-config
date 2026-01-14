@@ -6,5 +6,6 @@
     neovim
     tealdeer
     cmus
+    lynx
   ];
 }

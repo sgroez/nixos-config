@@ -8,5 +8,6 @@
     pavucontrol
     fuzzel
     quickshell
+    hyprshot
   ];
 }
