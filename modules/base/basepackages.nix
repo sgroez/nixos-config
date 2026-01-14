@@ -8,4 +8,6 @@
     cmus
     lynx
   ];
+
+  programs.direnv.enable = true;
 }
