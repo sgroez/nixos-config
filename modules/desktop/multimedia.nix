@@ -7,7 +7,6 @@
     audacity
     pdftricks
     imagemagick
-    kicad
     gthumb
   ];
 }
