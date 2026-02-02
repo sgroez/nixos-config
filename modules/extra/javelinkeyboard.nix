@@ -1,5 +1,5 @@
 { pkgs, ... }: {
   services.udev.extraRules = ''
-    SUBSYSTEM=="hidraw", ATTRS{idVendor}=="9000", ATTRS{idProduct}=="400d", MODE="0666"
+    SUBSYSTEM=="hidraw", KERNELS=="*:9000:400D.*", MODE="0666"
   '';
 }
