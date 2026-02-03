@@ -3,7 +3,7 @@
 
   imports = [
     ./hardware-configuration.nix
-    ../../modules/base.nix
+    ../../modules/base
     ../../modules/extra/powermanagement.nix
   ];
 
