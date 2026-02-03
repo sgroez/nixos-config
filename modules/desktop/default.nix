@@ -1,7 +1,7 @@
 {
   imports = [
-    ./gui.nix
-    ./desktop/multimedia.nix
-    ./desktop/gaming.nix
+    ../gui
+    ./multimedia.nix
+    ./gaming.nix
   ];
 }

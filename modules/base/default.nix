@@ -1,9 +1,9 @@
 {
   imports = [
-    ./base/locales.nix
-    ./base/fonts.nix
-    ./base/basepackages.nix
-    ./base/network.nix
+    ./locales.nix
+    ./fonts.nix
+    ./basepackages.nix
+    ./network.nix
   ];
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 }
