@@ -1,8 +1,14 @@
 { config, pkgs, ... }:
 
 {
-  imports = [
-    ../../modules/base/basepackages.nix
+  environment.systemPackages = with pkgs; [
+    git
+    gh
+    stow
+    neovim
+    tealdeer
+    cmus
+    lynx
   ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];

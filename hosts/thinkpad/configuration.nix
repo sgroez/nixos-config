@@ -3,11 +3,16 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/desktop
+    ../../modules/base
+    ../../modules/gui
+    ../../modules/gui/auth.nix
+    ../../modules/gui/multimedia.nix
+    ../../modules/gui/print.nix
+    ../../modules/gui/unfree.nix
     ../../modules/extra/powermanagement.nix
   ];
 
-  # Bootloader.
+  # Bootloader
   boot = {
     loader = {
       systemd-boot.enable = true;
