@@ -11,6 +11,7 @@
     ../../modules/gui/unfree.nix
     ../../modules/gui/coding.nix
     ../../modules/extra/powermanagement.nix
+    ../../modules/extra/esp32.nix
   ];
 
   # Bootloader
