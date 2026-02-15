@@ -9,6 +9,7 @@
     ../../modules/gui/multimedia.nix
     ../../modules/gui/print.nix
     ../../modules/gui/unfree.nix
+    ../../modules/gui/coding.nix
     ../../modules/extra/powermanagement.nix
   ];
 
