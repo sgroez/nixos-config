@@ -9,6 +9,7 @@
     tealdeer
     cmus
     lynx
+    kdePackages.elisa
   ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
