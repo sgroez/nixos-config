@@ -6,6 +6,5 @@
     pdftricks
     imagemagick
     gthumb
-    kdePackages.elisa
   ];
 }
