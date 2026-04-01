@@ -1,6 +1,7 @@
-{
+{pkgs, ...}: {
   virtualisation.podman.enable = true;
-  environment.systemPackages = [
-    pkgs.podman-compose
+
+  environment.systemPackages = with pkgs; [
+    podman-compose
   ];
 }
