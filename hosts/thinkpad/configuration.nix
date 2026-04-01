@@ -12,6 +12,7 @@
     ../../modules/gui/coding.nix
     ../../modules/extra/powermanagement.nix
     ../../modules/extra/esp32.nix
+    ../../modules/extra/podman.nix
   ];
 
   # Bootloader
