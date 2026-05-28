@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   # LOCALES
   time.timeZone = "Europe/Berlin";
   i18n.defaultLocale = "en_US.UTF-8";
@@ -22,32 +23,34 @@
   console.keyMap = "de";
 
   # NETWORK
-  networking.networkmanager.enable = true;
   services.resolved.enable = true;
-  networking.firewall.enable = true;
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ 22 ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
+  networking = {
+    networkmanager.enable = true;
+    firewall = {
+      enable = true;
+      # allowedTCPPorts = [ 22 ];
+      # allowedUDPPorts = [ ... ];
+    };
+  };
 
   # FONTS
   fonts.packages = with pkgs; [
     jetbrains-mono
-    material-symbols
   ];
 
   # PACKAGES
   environment.systemPackages = with pkgs; [
     git
-    gh
     stow
     neovim
     tealdeer
     cmus
-    lynx
   ];
 
   # EXTRA FEATURES / SERVICES
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   programs.direnv.enable = true;
-
 }
