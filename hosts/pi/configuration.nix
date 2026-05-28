@@ -1,5 +1,11 @@
 # inspired by github.com/plmercereau/nixos-pi-zero-2
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
 
   imports = [
     ./hardware-configuration.nix
@@ -67,7 +73,6 @@
   networking.wireless.enable = false;
   networking.networkmanager.enable = true;
   networking.firewall.enable = true;
-
 
   services.openssh.enable = true;
   services.openssh.settings.PermitRootLogin = "yes";

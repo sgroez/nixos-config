@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   # add function that automatically imports all submodules and adds options to toggle them
   # on or off
   programs.hyprland.enable = true;

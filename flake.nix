@@ -13,7 +13,7 @@
         "x86_64-linux"
         "aarch64-linux"
       ];
-      formatter = lib.genAttrs systems (system: (import nixpkgs { inherit system; }).nixfmt);
+      formatter = lib.genAttrs systems (system: (import nixpkgs { inherit system; }).nixfmt-tree);
     in
     {
       inherit formatter;

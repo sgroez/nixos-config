@@ -1,5 +1,6 @@
 # inspired by github.com/plmercereau/nixos-pi-zero-2
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+{
   imports = [
     ./sd-image.nix
   ];
@@ -9,7 +10,10 @@
     kernelPackage = pkgs.linuxKernel.packages.linux_rpi3.kernel;
     filter = "*2837*";
     overlays = [
-      { name = "gpio keyboard"; dtsFile = ./dts/gpio-keyboard.dts; }
+      {
+        name = "gpio keyboard";
+        dtsFile = ./dts/gpio-keyboard.dts;
+      }
       {
         name = "spi1-2cs";
         dtsFile = ./dts/spi.dts;
