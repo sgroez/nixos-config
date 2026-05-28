@@ -1,31 +1,46 @@
 {
-  # Firewall rules for NAT
-  networking.firewall.extraCommands = ''
-    # Set up SNAT on packets going from downstream to the wider internet
-    iptables -t nat -A POSTROUTING -o wlp3s0 -j MASQUERADE
+  pkgs,
+  lib,
+  config,
+  ...
+}:
+let
+  cfg = config.extraOptions.shareNetwork;
+in
+{
+  options.extraOptions.shareNetwork = {
+    enable = lib.mkEnableOption "extraOption shareNetwork";
+  };
 
-    # Accept all connections from downstream. May not be necessary
-    iptables -A INPUT -i enp0s31f6 -j ACCEPT
-  '';
+  config = mkIf cfg.enable {
+    # Firewall rules for NAT
+    networking.firewall.extraCommands = ''
+      # Set up SNAT on packets going from downstream to the wider internet
+      iptables -t nat -A POSTROUTING -o wlp3s0 -j MASQUERADE
 
-  networking.nftables.ruleset = ''
-    table ip nat {
-      chain POSTROUTING {
-        type nat hook postrouting priority 100;
-        oifname "wlp3s0" counter masquerade
+      # Accept all connections from downstream. May not be necessary
+      iptables -A INPUT -i enp0s31f6 -j ACCEPT
+    '';
+
+    networking.nftables.ruleset = ''
+      table ip nat {
+        chain POSTROUTING {
+          type nat hook postrouting priority 100;
+          oifname "wlp3s0" counter masquerade
+        }
       }
-    }
-    table ip filter {
-      chain INPUT {
-        iifname "enp0s31f6" counter accept
+      table ip filter {
+        chain INPUT {
+          iifname "enp0s31f6" counter accept
+        }
       }
-    }
-  '';
+    '';
 
-  environment.etc."NetworkManager/system-connections/shared-connection.nmconnection" = {
-    source = ./shared-connection.nmconnection;
-    mode = "0600";
-    user = "root";
-    group = "root";
+    environment.etc."NetworkManager/system-connections/shared-connection.nmconnection" = {
+      source = ./shared-connection.nmconnection;
+      mode = "0600";
+      user = "root";
+      group = "root";
+    };
   };
 }
