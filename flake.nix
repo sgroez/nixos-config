@@ -1,5 +1,5 @@
 {
-  description = "My modular multi platform NixOS configurations";
+  description = "My nixos configurations for all current used devices";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -18,30 +18,10 @@
     {
       inherit formatter;
       nixosConfigurations = {
-        thinkpad = nixpkgs.lib.nixosSystem {
+        stateless = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
-            ./hosts/thinkpad/configuration.nix
-          ];
-        };
-
-        piImage = nixpkgs.lib.nixosSystem {
-          system = "aarch64-linux";
-          modules = [
-            (
-              { modulesPath, ... }:
-              {
-                imports = [ (modulesPath + "/installer/sd-card/sd-image-aarch64.nix") ];
-              }
-            )
-            ./hosts/pi/configuration.nix
-          ];
-        };
-
-        pi = nixpkgs.lib.nixosSystem {
-          system = "aarch64-linux";
-          modules = [
-            ./hosts/pi/configuration.nix
+            ./hosts/stateless/configuration.nix
           ];
         };
       };
