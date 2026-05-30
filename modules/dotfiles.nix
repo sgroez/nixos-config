@@ -7,6 +7,14 @@
 }:
 let
   cfg = config.dotfiles;
+  inherit (lib)
+    mkEnableOption
+    mkOption
+    types
+    mkIf
+    mkMerge
+    concatMap
+    ;
 
   repo = pkgs.fetchFromGitHub rec {
     name = "dotfiles-${rev}";
@@ -16,34 +24,37 @@ let
     sha256 = "sha256-trcJX9zYp+wLsbm3I+vGxsePIVeErK4SY+DNmhFSSZU=";
   };
 
-  entries = builtins.filter (entry: entries.${entry} == "directory") (
-    builtins.attrNames (builtins.readDir repo)
-  );
+  contentsSet = builtins.readDir repo;
+  contents = builtins.map (name: {
+    inherit name;
+    type = contentsSet.${name};
+  }) (builtins.attrNames contentsSet);
+  entries = builtins.filter (entry: entry.type == "directory") contents;
 in
 {
   options.dotfiles = {
-    enable = lib.mkEnableOption "dotfiles";
-    usernames = lib.mkOption {
-      type = types.listOf str;
+    enable = mkEnableOption "dotfiles";
+    usernames = mkOption {
+      type = types.listOf types.str;
     };
-    usergroup = lib.mkOption {
+    usergroup = mkOption {
       type = types.str;
     };
   };
 
   # make sure .config exists for user and has the right permissions
   # symlink dotfiles into home directories of users
-  config = mkIf cfg.enable (
-    lib.mkMerge (
-      lib.concatMap (
+  config = mkIf cfg.enable {
+    systemd.tmpfiles.rules = (
+      concatMap (
         username:
         [
           (myLib.ensureDir "/home/${username}/.config" "700" username cfg.usergroup)
         ]
         ++ (builtins.map (
-          entry: myLib.symlink "${repo}/${entry}" "/home/${username}/.config/${entry}"
+          entry: myLib.symlink "${repo}/${entry.name}" "/home/${username}/.config/${entry.name}"
         ) entries)
       ) cfg.usernames
-    )
-  );
+    );
+  };
 }

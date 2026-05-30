@@ -6,10 +6,11 @@
 }:
 let
   cfg = config.extraOptions.powerManagement;
+  inherit (lib) mkEnableOption mkIf;
 in
 {
   options.extraOptions.powerManagement = {
-    enable = lib.mkEnableOption "extraOption powerManagement";
+    enable = mkEnableOption "extraOption powerManagement";
   };
 
   config = mkIf cfg.enable {

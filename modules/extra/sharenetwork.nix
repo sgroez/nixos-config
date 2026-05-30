@@ -6,10 +6,11 @@
 }:
 let
   cfg = config.extraOptions.shareNetwork;
+  inherit (lib) mkEnableOption mkIf;
 in
 {
   options.extraOptions.shareNetwork = {
-    enable = lib.mkEnableOption "extraOption shareNetwork";
+    enable = mkEnableOption "extraOption shareNetwork";
   };
 
   config = mkIf cfg.enable {

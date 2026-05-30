@@ -1,10 +1,16 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 let
   cfg = config.profiles.gaming;
+  inherit (lib) mkEnableOption mkIf;
 in
 {
   options.profiles.gaming = {
-    enable = lib.mkEnableOption "gaming profile";
+    enable = mkEnableOption "gaming profile";
   };
 
   config = mkIf cfg.enable {

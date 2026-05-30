@@ -6,10 +6,11 @@
 }:
 let
   cfg = config.extraOptions.javelinKeyboard;
+  inherit (lib) mkEnableOption mkIf;
 in
 {
   options.extraOptions.javelinKeyboard = {
-    enable = lib.mkEnableOption "extraOption javelinKeyboard";
+    enable = mkEnableOption "extraOption javelinKeyboard";
   };
 
   config = mkIf cfg.enable {

@@ -7,6 +7,13 @@
 }:
 let
   cfg = config.stateless.persist;
+  inherit (lib)
+    types
+    mkOption
+    mkEnableOption
+    mkIf
+    mkMerge
+    ;
 
   mappingType = types.submodule {
     options = {
@@ -38,26 +45,27 @@ let
 in
 {
   options.stateless.persist = {
-    enable = lib.mkEnableOption "stateless persist";
-    binds = lib.mkOption {
+    enable = mkEnableOption "stateless persist";
+    binds = mkOption {
       type = types.listOf mappingType;
       default = [ ];
     };
-    links = lib.mkOption {
+    links = mkOption {
       type = types.listOf mappingType;
       default = [ ];
     };
-    ensures = lib.mkOption {
+    ensures = mkOption {
       type = types.listOf ensureType;
       default = [ ];
     };
   };
 
-  config = mkIf cfg.enable (
-    lib.mkMerge (builtins.map (bind: (myLib.bindmount bind.source bind.target)) binds)
-    ++ (builtins.map (link: (myLib.symlink link.source link.target)) links)
-    ++ (builtins.map (
-      ensure: (myLib.ensureDir ensure.path ensure.permission ensure.username ensure.usergroup)
-    ) ensures)
-  );
+  config = mkIf cfg.enable {
+    fileSystems = mkMerge (builtins.map (bind: (myLib.persist.bindmount bind.source bind.target)) cfg.binds);
+
+    systemd.tmpfiles.rules = (builtins.map (link: (myLib.persist.symlink link.source link.target)) cfg.links)
+      ++ (builtins.map (
+        ensure: (myLib.persist.ensureDir ensure.path ensure.permission ensure.username ensure.usergroup)
+      ) cfg.ensures);
+  };
 }

@@ -6,11 +6,17 @@
 }:
 let
   cfg = config.profiles.base;
+  inherit (lib)
+    mkEnableOption
+    mkOption
+    types
+    mkIf
+    ;
 in
 {
   options.profiles.base = {
-    enable = lib.mkEnableOption "base profile";
-    hostname = lib.mkOption {
+    enable = mkEnableOption "base profile";
+    hostname = mkOption {
       type = types.str;
       default = "hostname";
     };
@@ -48,7 +54,7 @@ in
     # NETWORK
     services.resolved.enable = true;
     networking = {
-      hostname = "${hostname}";
+      hostName = "${cfg.hostname}";
       networkmanager.enable = true;
       firewall = {
         enable = true;

@@ -1,10 +1,16 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 let
   cfg = config.profiles.multimedia;
+  inherit (lib) mkEnableOption mkIf;
 in
 {
   options.profiles.multimedia = {
-    enable = lib.mkEnableOption "multimedia profile";
+    enable = mkEnableOption "multimedia profile";
   };
 
   config = mkIf cfg.enable {

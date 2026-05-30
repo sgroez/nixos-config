@@ -6,10 +6,11 @@
 }:
 let
   cfg = config.extraOptions.huaweiModem;
+  inherit (lib) mkEnableOption mkIf;
 in
 {
   options.extraOptions.huaweiModem = {
-    enable = lib.mkEnableOption "extraOption huaweiModem";
+    enable = mkEnableOption "extraOption huaweiModem";
   };
 
   config = mkIf cfg.enable {

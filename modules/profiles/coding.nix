@@ -1,10 +1,16 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 let
   cfg = config.profiles.coding;
+  inherit (lib) mkEnableOption mkIf;
 in
 {
   options.profiles.coding = {
-    enable = lib.mkEnableOption "coding profile";
+    enable = mkEnableOption "coding profile";
   };
 
   config = mkIf cfg.enable {

@@ -6,11 +6,17 @@
 }:
 let
   cfg = config.auth.pam;
+  inherit (lib)
+    mkEnableOption
+    mkOption
+    mkIf
+    types
+    ;
 in
 {
   options.auth.pam = {
-    enable = lib.mkEnableOption "pam auth";
-    authFile = lib.mkOption {
+    enable = mkEnableOption "pam auth";
+    authFile = mkOption {
       type = types.path;
     };
   };
@@ -22,7 +28,7 @@ in
         interactive = true;
         cue = true;
         pinverification = 1;
-        authfile = authFile;
+        authfile = cfg.authFile;
       };
     };
 

@@ -6,10 +6,11 @@
 }:
 let
   cfg = config.extraOptions.bluetooth;
+  inherit (lib) mkEnableOption mkIf;
 in
 {
   options.extraOptions.bluetooth = {
-    enable = lib.mkEnableOption "extraOption bluetooth";
+    enable = mkEnableOption "extraOption bluetooth";
   };
 
   config = mkIf cfg.enable {
