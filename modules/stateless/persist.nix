@@ -61,9 +61,12 @@ in
   };
 
   config = mkIf cfg.enable {
-    fileSystems = mkMerge (builtins.map (bind: (myLib.persist.bindmount bind.source bind.target)) cfg.binds);
+    fileSystems = mkMerge (
+      builtins.map (bind: (myLib.persist.bindmount bind.source bind.target)) cfg.binds
+    );
 
-    systemd.tmpfiles.rules = (builtins.map (link: (myLib.persist.symlink link.source link.target)) cfg.links)
+    systemd.tmpfiles.rules =
+      (builtins.map (link: (myLib.persist.symlink link.source link.target)) cfg.links)
       ++ (builtins.map (
         ensure: (myLib.persist.ensureDir ensure.path ensure.permission ensure.username ensure.usergroup)
       ) cfg.ensures);
