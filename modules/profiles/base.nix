@@ -17,6 +17,12 @@ in
   };
 
   config = mkIf cfg.enable {
+    # BOOT
+    boot.loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+
     # LOCALES
     time.timeZone = "Europe/Berlin";
     i18n.defaultLocale = "en_US.UTF-8";
@@ -42,6 +48,7 @@ in
     # NETWORK
     services.resolved.enable = true;
     networking = {
+      hostname = "${hostname}";
       networkmanager.enable = true;
       firewall = {
         enable = true;
