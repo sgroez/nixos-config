@@ -1,10 +1,12 @@
 {
   imports = [
+    ./auth/pam.nix
     ./profiles/base.nix
     ./profiles/gui.nix
     ./profiles/multimedia.nix
     ./profiles/coding.nix
     ./profiles/gaming.nix
+    ./dotfiles.nix
     ./extra/bluetooth.nix
     ./extra/javelinkeyboard.nix
     ./extra/huaweiusbmodem.nix
