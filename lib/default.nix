@@ -1,3 +1,3 @@
 {
-  persist = import ./persist.nix persist;
+  persist = import ./persist.nix;
 }
