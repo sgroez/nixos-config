@@ -1,86 +1,83 @@
 { config, pkgs, ... }:
+let
+  persist = "/nix/persist";
+  username = "stateless";
+in
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./persist.nix
-      ./dotfiles.nix
-      ./disko-config.nix
-      ./unfree.nix
-    ];
+  imports = [
+    # Include all modules (enable needed modules below).
+    ../../modules
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    # Include the disk config for disko.
+    ./disko-config.nix
+  ];
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader = {
-    systemd-boot.enable = true;
-    efi.canTouchEfiVariables = true;
-  };
-
-  # Yubikey login and sudo
-  security.pam.u2f = {
+  # Configure modules
+  auth.pam.enable = true;
+  auth.pam.authFile = "/nix/persist/etc/Yubico/u2f_keys";
+  profiles.gui.enable = true;
+  profiles.gui.allowUnfree = true;
+  profiles.base.hostname = "${username}";
+  dotfiles = {
     enable = true;
-    settings = {
-      interactive = true;
-      cue = true;
-      pinverification = 1;
-      authfile = "/nix/persist/etc/Yubico/u2f_keys";
-    };
+    usernames = [ "${username}" ];
+    usergroup = "users";
   };
+  extraOptions.powerManagement.enable = true;
 
-  security.pam.services = {
-    login = {
-      u2fAuth = true;
-      unixAuth = false;
-    };
-    sudo = {
-      u2fAuth = true;
-      unixAuth = false;
-    };
+  stateless.persist = {
+    enable = true;
+    binds = [
+      {
+        source = "${persist}/etc/nixos";
+        target = "/etc/nixos";
+      }
+      {
+        source = "${persist}/var/log";
+        target = "/var/log";
+      }
+      {
+        source = "${persist}/etc/machine-id";
+        target = "/etc/machine-id";
+      }
+      {
+        source = "${persist}/etc/NetworkManager/system-connections";
+        target = "/etc/NetworkManager/system-connections";
+      }
+      {
+        source = "${persist}/${username}/.gitconfig";
+        target = "/home/${username}/.gitconfig";
+      }
+      {
+        source = "${persist}/${username}/.ssh";
+        target = "/home/${username}/.ssh";
+      }
+      {
+        source = "${persist}/${username}/code";
+        target = "/home/${username}/code";
+      }
+      {
+        source = "${persist}/${username}/books";
+        target = "/home/${username}/books";
+      }
+    ];
+    links = [ ];
+    ensures = [ ];
   };
-
-  # Networking
-  networking = {
-    hostName = "stateless";
-    networkmanager.enable = true;
-  # firewall.allowedTCPPorts = [ ... ];
-  # firewall.allowedUDPPorts = [ ... ];
-  };
-
-  # Set your time zone.
-  time.timeZone = "Europe/Berlin";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-  console.keyMap = "de";
 
   # Define a user account.
   users = {
     mutableUsers = false;
     allowNoPasswordLogin = true;
-    users.stateless = {
+    users."${username}" = {
       isNormalUser = true;
       uid = 1000; # set uid to persist with tmpfs root filesystem
       extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-      packages = with pkgs; [
-        neovim
-        tor-browser
-        koreader
-      ];
+      packages = with pkgs; [ ];
     };
   };
 
-  # System packages
-  environment.systemPackages = with pkgs; [
-    kitty
-    fuzzel
-    git
-    gh
-  ];
-
-  # WM
-  programs.hyprland.enable = true;
-
   # Configuration version and extra features
   system.stateVersion = "25.11";
-  nix.settings.experimental-features = ["nix-command" "flakes" ];
 }
-
