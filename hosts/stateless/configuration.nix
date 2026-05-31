@@ -15,7 +15,7 @@ in
 
   # Configure modules
   auth.pam.enable = true;
-  auth.pam.authFile = "/nix/persist/etc/Yubico/u2f_keys";
+  auth.pam.authFile = "${persist}/etc/Yubico/u2f_keys";
   profiles.gui.enable = true;
   profiles.gui.allowUnfree = true;
   profiles.base.hostname = "${username}";
