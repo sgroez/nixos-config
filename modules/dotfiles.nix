@@ -49,10 +49,10 @@ in
       concatMap (
         username:
         [
-          (myLib.ensureDir "/home/${username}/.config" "700" username cfg.usergroup)
+          (myLib.persist.ensureDir "/home/${username}/.config" "700" username cfg.usergroup)
         ]
         ++ (builtins.map (
-          entry: myLib.symlink "${repo}/${entry.name}" "/home/${username}/.config/${entry.name}"
+          entry: myLib.persist.symlink "${repo}/${entry.name}" "/home/${username}/.config/${entry.name}"
         ) entries)
       ) cfg.usernames
     );
