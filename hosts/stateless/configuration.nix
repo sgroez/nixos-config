@@ -30,10 +30,6 @@ in
     enable = true;
     binds = [
       {
-        source = "${persist}/etc/nixos";
-        target = "/etc/nixos";
-      }
-      {
         source = "${persist}/var/log";
         target = "/var/log";
       }
