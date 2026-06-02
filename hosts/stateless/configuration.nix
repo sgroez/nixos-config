@@ -18,7 +18,7 @@ in
   auth.pam.authFile = "${persist}/etc/Yubico/u2f_keys";
   profiles.gui.enable = true;
   profiles.gui.allowUnfree = true;
-  profiles.base.hostname = "${username}";
+  profiles.base.hostname = "thinkpad";
   dotfiles = {
     enable = true;
     usernames = [ "${username}" ];
