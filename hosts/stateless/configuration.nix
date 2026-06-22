@@ -13,6 +13,7 @@ in
     ./disko-config.nix
   ];
 
+  # TODO remote control .gitconfig .ssh and Yubico/u2f_keys
   # Configure modules
   auth.pam.enable = true;
   auth.pam.authFile = "${persist}/etc/Yubico/u2f_keys";
@@ -25,6 +26,7 @@ in
     usergroup = "users";
   };
   extraOptions.powerManagement.enable = true;
+  extraOptions.bluetooth.enable = true;
 
   stateless.persist = {
     enable = true;
