@@ -36,10 +36,6 @@ in
         target = "/var/log";
       }
       {
-        source = "${persist}/etc/machine-id";
-        target = "/etc/machine-id";
-      }
-      {
         source = "${persist}/etc/NetworkManager/system-connections";
         target = "/etc/NetworkManager/system-connections";
       }
