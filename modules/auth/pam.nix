@@ -25,7 +25,6 @@ in
     security.pam.u2f = {
       enable = true;
       settings = {
-        interactive = true;
         cue = true;
         pinverification = 1;
         authfile = cfg.authFile;
