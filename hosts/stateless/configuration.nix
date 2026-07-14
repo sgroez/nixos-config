@@ -48,10 +48,6 @@ in
         target = "/home/${username}/.ssh";
       }
       {
-        source = "${persist}/${username}/.local/state/wireplumber";
-        target = "/home/${username}/.local/state/wireplumber";
-      }
-      {
         source = "${persist}/${username}/code";
         target = "/home/${username}/code";
       }
