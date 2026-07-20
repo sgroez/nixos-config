@@ -18,16 +18,15 @@
       ...
     }:
     let
-      lib = nixpkgs.lib;
       myLib = import ./lib;
       systems = [
         "x86_64-linux"
         "aarch64-linux"
       ];
-      formatter = lib.genAttrs systems (system: (import nixpkgs { inherit system; }).nixfmt-tree);
+      forAllSystems = nixpkgs.lib.genAttrs systems; # partially apply function for easier use
     in
     {
-      inherit formatter;
+      formatter = forAllSystems (system: (import nixpkgs { inherit system; }).nixfmt-tree);
       nixosConfigurations = {
         stateless = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
