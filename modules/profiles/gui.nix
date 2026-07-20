@@ -46,7 +46,7 @@ in
           DisableTelemetry = true;
           DisableFirefoxStudies = true;
           EnableTrackingProtection = {
-            Value= true;
+            Value = true;
             Locked = true;
             Cryptomining = true;
             Fingerprinting = true;
@@ -74,8 +74,11 @@ in
               installation_mode = "force_installed";
             };
           };
-          Preferences = { 
-            "browser.contentblocking.category" = { Value = "strict"; Status = "locked"; };
+          Preferences = {
+            "browser.contentblocking.category" = {
+              Value = "strict";
+              Status = "locked";
+            };
             "extensions.pocket.enabled" = lock-false;
             "extensions.screenshots.disabled" = lock-true;
             "browser.topsites.contile.enabled" = lock-false;

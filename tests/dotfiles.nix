@@ -2,7 +2,7 @@
   name = "dotfiles";
 
   # test system config for virtual machine
-  nodes.machine = { ... }: {};
+  nodes.machine = { ... }: { };
 
   # python script to test if config is working as expected on virtual machine
   testScript = ''
