@@ -22,6 +22,7 @@ in
       pdftricks
       imagemagick
       gthumb
+      darktable
     ];
   };
 }
