@@ -17,7 +17,7 @@ in
   # Configure modules
   auth.pam.enable = true;
   auth.pam.authFile = "${persist}/etc/Yubico/u2f_keys";
-  profiles.gui.enable = true;
+  profiles.multimedia.enable = true;
   profiles.gui.allowUnfree = true;
   profiles.base.hostname = "thinkpad";
   dotfiles = {
