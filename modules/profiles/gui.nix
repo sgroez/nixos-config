@@ -100,6 +100,12 @@ in
         };
       };
 
+      xdg.mime.defaultApplications = {
+        "text/html" = "firefox.desktop";
+        "x-scheme-handler/http" = "firefox.desktop";
+        "x-scheme-handler/https" = "firefox.desktop";
+      };
+
       services.pcscd.enable = true;
 
       services.printing.enable = true;
