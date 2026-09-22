@@ -20,8 +20,8 @@ let
     name = "dotfiles-${rev}";
     owner = "sgroez";
     repo = "dotfiles";
-    rev = "baadad8d4ffba34598c403f08b1c507c5644f02e";
-    sha256 = "sha256-bTkrwygJaObxhO4iUyZlxY2iDLHIuE1GWLRVP7SE/qQ=";
+    rev = "d0d69c1cb580b58900247c0ae0fe927414a16239";
+    sha256 = "sha256-jVAWG4Wb0eKZgR6akdvHUNgoLVblE89yW/MiXJAkc0I=";
   };
 
   contentsSet = builtins.readDir repo;
