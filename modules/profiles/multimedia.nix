@@ -23,6 +23,7 @@ in
       imagemagick
       gthumb
       darktable
+      orca-slicer
     ];
   };
 }
