@@ -17,18 +17,15 @@ in
   config = mkIf cfg.enable {
     profiles.gui.enable = true;
 
-    environment.systemPackages =
-      (with pkgs; [
-        gimp
-        blender
-        audacity
-        pdftricks
-        imagemagick
-        gthumb
-        darktable
-      ])
-      ++ (with pkgs-stable; [
-        orca-slicer
-      ]);
+    environment.systemPackages = with pkgs; [
+      gimp
+      blender
+      #audacity
+      pdftricks
+      imagemagick
+      gthumb
+      darktable
+      orca-slicer
+    ];
   };
 }
