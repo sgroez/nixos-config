@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-26.05";
 
     disko = {
       url = "github:nix-community/disko/latest";
@@ -14,6 +15,7 @@
     {
       self,
       nixpkgs,
+      nixpkgs-stable,
       disko,
       ...
     }:
@@ -31,6 +33,7 @@
         stateless = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = {
+            pkgs-stable = nixpkgs-stable.legacyPackages.x86_64-linux;
             inherit myLib;
           };
           modules = [

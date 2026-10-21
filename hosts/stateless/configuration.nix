@@ -72,10 +72,10 @@ in
     };
   };
 
-    # PACKAGES
-    environment.systemPackages = with pkgs; [
-      kicad
-    ];
+  # PACKAGES
+  environment.systemPackages = with pkgs; [
+    kicad
+  ];
 
   # Configuration version and extra features
   system.stateVersion = "25.11";
