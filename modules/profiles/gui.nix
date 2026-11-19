@@ -24,10 +24,6 @@ in
 
   config = mkIf cfg.enable (mkMerge [
     {
-      imports = [
-        ./programs/hyprland.nix
-      ];
-
       profiles.base.enable = true;
 
       hyprland.enable = true;

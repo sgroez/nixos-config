@@ -3,7 +3,6 @@
   lib,
   config,
   myLib,
-  config,
   ...
 }:
 let
@@ -164,13 +163,7 @@ in
     programs.hyprland.enable = true;
     # symlink config file to user home dir
     systemd.tmpfiles.rules = map (
-      username:
-      [
-        myLib.persist.symlink
-        configFile
-        "/home/${user.username}/.config/hypr/hyprland.lua"
-      ]
-        usernames
-    );
+      username: myLib.persist.symlink configFile "/home/${username}/.config/hypr/hyprland.lua"
+    ) usernames;
   };
 }

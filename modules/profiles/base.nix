@@ -14,10 +14,6 @@ let
     ;
 in
 {
-  imports = [
-    ./programs/neovim.nix
-  ];
-
   options.profiles.base = {
     enable = mkEnableOption "base profile";
     hostname = mkOption {
