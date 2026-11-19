@@ -24,9 +24,13 @@ in
 
   config = mkIf cfg.enable (mkMerge [
     {
+      imports = [
+        ./programs/hyprland.nix
+      ];
+
       profiles.base.enable = true;
 
-      programs.hyprland.enable = true;
+      hyprland.enable = true;
       services.upower.enable = true;
 
       environment.systemPackages = with pkgs; [

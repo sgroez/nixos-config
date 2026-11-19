@@ -20,11 +20,6 @@ in
   profiles.multimedia.enable = true;
   profiles.gui.allowUnfree = true;
   profiles.base.hostname = "thinkpad";
-  dotfiles = {
-    enable = true;
-    usernames = [ "${username}" ];
-    usergroup = "users";
-  };
   extraOptions.powerManagement.enable = true;
   extraOptions.bluetooth.enable = true;
 

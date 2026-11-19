@@ -14,6 +14,10 @@ let
     ;
 in
 {
+  imports = [
+    ./programs/neovim.nix
+  ];
+
   options.profiles.base = {
     enable = mkEnableOption "base profile";
     hostname = mkOption {
@@ -74,10 +78,10 @@ in
     environment.systemPackages = with pkgs; [
       git
       stow
-      neovim
       tealdeer
       cmus
     ];
+    neovim.enable = true;
 
     # EXTRA FEATURES / SERVICES
     nix.settings.experimental-features = [

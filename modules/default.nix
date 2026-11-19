@@ -6,7 +6,6 @@
     ./profiles/multimedia.nix
     ./profiles/coding.nix
     ./profiles/gaming.nix
-    ./dotfiles.nix
     ./stateless/persist.nix
     ./extra/bluetooth.nix
     ./extra/javelinkeyboard.nix
