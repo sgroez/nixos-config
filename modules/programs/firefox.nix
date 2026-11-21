@@ -6,7 +6,7 @@
 }:
 let
   cfg = config.firefox;
-  inherit (lib) mkEnableOption;
+  inherit (lib) mkEnableOption mkIf;
   lock-false = {
     Value = false;
     Status = "locked";

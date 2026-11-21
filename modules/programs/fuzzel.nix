@@ -31,7 +31,7 @@ let
     selection=a06419ff
     selection-text=faba38ff
     border=ffee4fff;
-  ''
+  '';
 in
 {
   options.fuzzel = {
