@@ -6,9 +6,7 @@
     ./profiles/multimedia.nix
     ./profiles/coding.nix
     ./profiles/gaming.nix
-    ./programs/default.nix
-    ./programs/neovim.nix
-    ./programs/hyprland.nix
+    ./programs
     ./stateless/persist.nix
     ./extra/bluetooth.nix
     ./extra/javelinkeyboard.nix

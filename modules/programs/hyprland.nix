@@ -12,11 +12,13 @@ let
     mkOption
     types
     mkIf
-    map
-    attrNames
+    concatMap
     ;
 
-  usernames = attrNames config.users.users;
+  usernames = lib.pipe config.users.users [
+    (lib.filterAttrs (name: userConfig: userConfig.isNormalUser))
+    lib.attrNames
+  ];
 
   configFile = pkgs.writeText "hyprland.lua" ''
     ------------------
@@ -160,10 +162,18 @@ in
   };
 
   config = mkIf cfg.enable {
+    assertions = [
+      {
+        assertion = cfg.enable -> usernames != [ ];
+        message = "When this module is enabled there should at least be one user present!";
+      }
+    ];
+
     programs.hyprland.enable = true;
     # symlink config file to user home dir
-    systemd.tmpfiles.rules = map (
-      username: myLib.persist.symlink configFile "/home/${username}/.config/hypr/hyprland.lua"
-    ) usernames;
+    systemd.tmpfiles.rules = concatMap (username: [
+      (myLib.persist.ensureDir "/home/${username}/.config/hypr" "0700" username "users")
+      (myLib.persist.symlink "${configFile}" "/home/${username}/.config/hypr/hyprland.lua")
+    ]) usernames;
   };
 }

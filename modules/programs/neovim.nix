@@ -12,11 +12,13 @@ let
     mkOption
     types
     mkIf
-    map
-    attrNames
+    concatMap
     ;
 
-  usernames = attrNames config.users.users;
+  usernames = lib.pipe config.users.users [
+    (lib.filterAttrs (name: userConfig: userConfig.isNormalUser))
+    lib.attrNames
+  ];
 
   configFile = pkgs.writeText "init.lua" ''
     -- Basic settings
@@ -52,8 +54,9 @@ in
       neovim
     ];
     # symlink config file to user home dir
-    systemd.tmpfiles.rules = map (
-      username: myLib.persist.symlink configFile "/home/${username}/.config/nvim/init.lua"
-    ) usernames;
+    systemd.tmpfiles.rules = concatMap (username: [
+      (myLib.persist.ensureDir "/home/${username}/.config/nvim" "0700" username "users")
+      (myLib.persist.symlink "${configFile}" "/home/${username}/.config/nvim/init.lua")
+    ]) usernames;
   };
 }
