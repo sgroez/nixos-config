@@ -20,11 +20,11 @@ in
 
       hyprland.enable = true;
       fuzzel.enable = true;
+      kitty.enable = true;
       firefox.enable = true;
       services.upower.enable = true;
 
       environment.systemPackages = with pkgs; [
-        kitty
         brightnessctl
         pavucontrol
         quickshell

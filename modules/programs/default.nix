@@ -19,8 +19,9 @@ in
 {
   imports = [
     ./hyprland.nix
-    ./neovim.nix
     ./fuzzel.nix
+    ./kitty.nix
+    ./neovim.nix
     ./firefox.nix
   ];
   # make sure .config folder exists with right permissions in user directory
