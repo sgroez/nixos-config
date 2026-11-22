@@ -19,6 +19,7 @@ in
       profiles.base.enable = true;
 
       hyprland.enable = true;
+      quickshell.enable = true;
       fuzzel.enable = true;
       kitty.enable = true;
       firefox.enable = true;
