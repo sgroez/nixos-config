@@ -19,6 +19,7 @@ in
 {
   imports = [
     ./hyprland.nix
+    ./quickshell.nix
     ./fuzzel.nix
     ./kitty.nix
     ./neovim.nix

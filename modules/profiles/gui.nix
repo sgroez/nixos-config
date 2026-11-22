@@ -27,7 +27,6 @@ in
       environment.systemPackages = with pkgs; [
         brightnessctl
         pavucontrol
-        quickshell
         hyprshot
         yubioath-flutter
       ];
