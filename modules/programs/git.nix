@@ -9,15 +9,17 @@ let
 in
 {
   options.git = {
-    enable = mkEnableOption "enable git";
+    enable = lib.mkEnableOption "enable git";
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     programs.git = {
       enable = true;
-      settings.user = {
-        name = "sgroez";
-        email = "venticx@gmail.com";
+      config = {
+        user = {
+          name = "sgroez";
+          email = "venticx@gmail.com";
+        };
       };
     };
   };

@@ -6,7 +6,6 @@
 }:
 let
   cfg = config.firefox;
-  inherit (lib) mkEnableOption mkIf;
   lock-false = {
     Value = false;
     Status = "locked";
@@ -18,10 +17,10 @@ let
 in
 {
   options.firefox = {
-    enable = mkEnableOption "enable firefox";
+    enable = lib.mkEnableOption "enable firefox";
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     # taken from https://discourse.nixos.org/t/declare-firefox-extensions-and-settings/36265
     programs.firefox = {
       enable = true;

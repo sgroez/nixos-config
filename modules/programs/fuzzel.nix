@@ -22,15 +22,15 @@ let
 in
 {
   options.fuzzel = {
-    enable = mkEnableOption "enable fuzzel";
+    enable = lib.mkEnableOption "enable fuzzel";
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       fuzzel
     ];
     # symlink config file to user home dir
-    stateless.impermanence = lib.mkIf stateless.impermanence.enable {
+    stateless.impermanence = {
       ensures = [
         {
           path = "/etc/xdg/fuzzel";

@@ -25,7 +25,7 @@ in
 
   stateless.impermanence = {
     enable = true;
-    binds = [
+    persists = [
       {
         source = "${persist}/var/log";
         target = "/var/log";
@@ -37,14 +37,29 @@ in
       {
         source = "${persist}/${username}/.ssh";
         target = "/home/${username}/.ssh";
+        permissions = {
+          mode = "0700";
+          owner = "stateless";
+          group = "users";
+        };
       }
       {
         source = "${persist}/${username}/code";
         target = "/home/${username}/code";
+        permissions = {
+          mode = "0700";
+          owner = "stateless";
+          group = "users";
+        };
       }
       {
         source = "${persist}/${username}/books";
         target = "/home/${username}/books";
+        permissions = {
+          mode = "0700";
+          owner = "stateless";
+          group = "users";
+        };
       }
     ];
   };

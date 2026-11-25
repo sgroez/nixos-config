@@ -40,7 +40,7 @@ in
     environment.systemPackages = with pkgs; [
       neovim
     ];
-    stateless.impermanence = lib.mkIf stateless.impermanence.enable {
+    stateless.impermanence = {
       ensures = [
         {
           path = "/etc/xdg/nvim";

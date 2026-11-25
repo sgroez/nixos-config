@@ -72,11 +72,11 @@ in
 
     # PACKAGES
     environment.systemPackages = with pkgs; [
-      git
       stow
       tealdeer
       cmus
     ];
+    git.enable = true;
     neovim.enable = true;
 
     # EXTRA FEATURES / SERVICES

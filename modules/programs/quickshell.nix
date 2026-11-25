@@ -9,14 +9,14 @@ let
 in
 {
   options.quickshell = {
-    enable = mkEnableOption "enable quickshell";
+    enable = lib.mkEnableOption "enable quickshell";
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       quickshell
     ];
-    stateless.impermanence = lib.mkIf stateless.impermanence.enable {
+    stateless.impermanence = {
       links = [
         {
           source = "${./quickshell}";

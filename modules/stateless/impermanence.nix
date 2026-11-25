@@ -18,7 +18,7 @@ let
     options = {
       mode = mkOption {
         type = types.str;
-        default = "0444";
+        default = "0755";
       };
       owner = mkOption {
         type = types.str;
@@ -69,6 +69,7 @@ let
 
   #TODO filter duplicates in persists, ensures and links ??
 
+  #TODO make sure directories exist with correct permissions
   persistList = builtins.map (persist: {
     "${persist.target}" = {
       device = "${persist.source}";
@@ -79,10 +80,10 @@ let
 
   ensureList = builtins.map (
     ensure:
-    "d ${ensure.path} ${ensure.permission.mode} ${ensure.permission.owner} ${ensure.permission.group} - -"
+    "d ${ensure.path} ${ensure.permissions.mode} ${ensure.permissions.owner} ${ensure.permissions.group} - -"
   ) cfg.ensures;
 
-  linkList = builtins.map (link: [ "L+ ${link.target} - - - - ${link.source}" ]) cfg.links;
+  linkList = builtins.map (link: "L+ ${link.target} - - - - ${link.source}") cfg.links;
 in
 {
   options.stateless.impermanence = {
@@ -93,7 +94,7 @@ in
     };
     ensures = mkOption {
       type = types.listOf ensureType;
-      defualt = [ ];
+      default = [ ];
     };
     links = mkOption {
       type = types.listOf linkType;

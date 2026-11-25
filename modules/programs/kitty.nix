@@ -19,14 +19,14 @@ let
 in
 {
   options.kitty = {
-    enable = mkEnableOption "enable kitty";
+    enable = lib.mkEnableOption "enable kitty";
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       kitty
     ];
-    stateless.impermanence = lib.mkIf stateless.impermanence.enable {
+    stateless.impermanence = {
       ensures = [
         {
           path = "/etc/xdg/kitty";

@@ -14,7 +14,7 @@
     ./kitty.nix
     ./firefox.nix
   ];
-  stateless.impermanence = lib.mkIf stateless.impermanence.enable {
+  stateless.impermanence = {
     ensures = [
       {
         path = "/etc/xdg";

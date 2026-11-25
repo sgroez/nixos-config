@@ -145,12 +145,12 @@ let
 in
 {
   options.hyprland = {
-    enable = mkEnableOption "enable hyprland";
+    enable = lib.mkEnableOption "enable hyprland";
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     programs.hyprland.enable = true;
-    stateless.impermanence = lib.mkIf stateless.impermanence.enable {
+    stateless.impermanence = {
       ensures = [
         {
           path = "/etc/xdg/hypr";
