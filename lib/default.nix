@@ -1,3 +1,0 @@
-{
-  persist = import ./persist.nix;
-}

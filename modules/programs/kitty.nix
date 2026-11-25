@@ -2,23 +2,10 @@
   pkgs,
   lib,
   config,
-  myLib,
   ...
 }:
 let
   cfg = config.kitty;
-  inherit (lib)
-    mkEnableOption
-    mkOption
-    types
-    mkIf
-    concatMap
-    ;
-
-  usernames = lib.pipe config.users.users [
-    (lib.filterAttrs (name: userConfig: userConfig.isNormalUser))
-    lib.attrNames
-  ];
 
   configFile = pkgs.writeText "kitty.conf" ''
     confirm_os_window_close 0
@@ -39,10 +26,23 @@ in
     environment.systemPackages = with pkgs; [
       kitty
     ];
-    # symlink config file to user home dir
-    systemd.tmpfiles.rules = concatMap (username: [
-      (myLib.persist.ensureDir "/home/${username}/.config/kitty" "0700" username "users")
-      (myLib.persist.symlink "${configFile}" "/home/${username}/.config/kitty/kitty.conf")
-    ]) usernames;
+    stateless.impermanence = lib.mkIf stateless.impermanence.enable {
+      ensures = [
+        {
+          path = "/etc/xdg/kitty";
+          permissions = {
+            mode = "0755";
+            owner = "root";
+            group = "root";
+          };
+        }
+      ];
+      links = [
+        {
+          source = "${configFile}";
+          target = "/etc/xdg/kitty/kitty.conf";
+        }
+      ];
+    };
   };
 }

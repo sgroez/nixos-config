@@ -18,7 +18,6 @@
       ...
     }:
     let
-      myLib = import ./lib;
       systems = [
         "x86_64-linux"
         "aarch64-linux"
@@ -30,9 +29,6 @@
       nixosConfigurations = {
         stateless = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = {
-            inherit myLib;
-          };
           modules = [
             ./hosts/stateless/configuration.nix
             disko.nixosModules.disko

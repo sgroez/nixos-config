@@ -2,31 +2,28 @@
   pkgs,
   lib,
   config,
-  myLib,
   ...
 }:
-let
-  inherit (lib)
-    map
-    attrNames
-    ;
-
-  usernames = lib.pipe config.users.users [
-    (lib.filterAttrs (name: userConfig: userConfig.isNormalUser))
-    lib.attrNames
-  ];
-in
 {
   imports = [
+    ./git.nix
+    ./neovim.nix
     ./hyprland.nix
     ./quickshell.nix
     ./fuzzel.nix
     ./kitty.nix
-    ./neovim.nix
     ./firefox.nix
   ];
-  # make sure .config folder exists with right permissions in user directory
-  systemd.tmpfiles.rules = map (
-    username: myLib.persist.ensureDir "/home/${username}/.config" "700" username "users"
-  ) usernames;
+  stateless.impermanence = lib.mkIf stateless.impermanence.enable {
+    ensures = [
+      {
+        path = "/etc/xdg";
+        permissions = {
+          mode = "0755";
+          owner = "root";
+          group = "root";
+        };
+      }
+    ];
+  };
 }

@@ -2,23 +2,10 @@
   pkgs,
   lib,
   config,
-  myLib,
   ...
 }:
 let
   cfg = config.quickshell;
-  inherit (lib)
-    mkEnableOption
-    mkOption
-    types
-    mkIf
-    concatMap
-    ;
-
-  usernames = lib.pipe config.users.users [
-    (lib.filterAttrs (name: userConfig: userConfig.isNormalUser))
-    lib.attrNames
-  ];
 in
 {
   options.quickshell = {
@@ -29,9 +16,13 @@ in
     environment.systemPackages = with pkgs; [
       quickshell
     ];
-    # symlink config file to user home dir
-    systemd.tmpfiles.rules = concatMap (username: [
-      (myLib.persist.symlink "${./quickshell}" "/home/${username}/.config/quickshell")
-    ]) usernames;
+    stateless.impermanence = lib.mkIf stateless.impermanence.enable {
+      links = [
+        {
+          source = "${./quickshell}";
+          target = "/etc/xdg/quickshell";
+        }
+      ];
+    };
   };
 }

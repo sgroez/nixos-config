@@ -7,7 +7,7 @@
     ./profiles/coding.nix
     ./profiles/gaming.nix
     ./programs
-    ./stateless/persist.nix
+    ./stateless/impermanence.nix
     ./extra/bluetooth.nix
     ./extra/javelinkeyboard.nix
     ./extra/huaweiusbmodem.nix

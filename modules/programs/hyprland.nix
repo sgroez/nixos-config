@@ -2,23 +2,10 @@
   pkgs,
   lib,
   config,
-  myLib,
   ...
 }:
 let
   cfg = config.hyprland;
-  inherit (lib)
-    mkEnableOption
-    mkOption
-    types
-    mkIf
-    concatMap
-    ;
-
-  usernames = lib.pipe config.users.users [
-    (lib.filterAttrs (name: userConfig: userConfig.isNormalUser))
-    lib.attrNames
-  ];
 
   configFile = pkgs.writeText "hyprland.lua" ''
     ------------------
@@ -162,18 +149,24 @@ in
   };
 
   config = mkIf cfg.enable {
-    assertions = [
-      {
-        assertion = cfg.enable -> usernames != [ ];
-        message = "When this module is enabled there should at least be one user present!";
-      }
-    ];
-
     programs.hyprland.enable = true;
-    # symlink config file to user home dir
-    systemd.tmpfiles.rules = concatMap (username: [
-      (myLib.persist.ensureDir "/home/${username}/.config/hypr" "0700" username "users")
-      (myLib.persist.symlink "${configFile}" "/home/${username}/.config/hypr/hyprland.lua")
-    ]) usernames;
+    stateless.impermanence = lib.mkIf stateless.impermanence.enable {
+      ensures = [
+        {
+          path = "/etc/xdg/hypr";
+          permissions = {
+            mode = "0755";
+            owner = "root";
+            group = "root";
+          };
+        }
+      ];
+      links = [
+        {
+          source = "${configFile}";
+          target = "/etc/xdg/hypr/hyprland.lua";
+        }
+      ];
+    };
   };
 }

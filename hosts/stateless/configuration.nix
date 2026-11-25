@@ -23,7 +23,7 @@ in
   extraOptions.powerManagement.enable = true;
   extraOptions.bluetooth.enable = true;
 
-  stateless.persist = {
+  stateless.impermanence = {
     enable = true;
     binds = [
       {
@@ -33,10 +33,6 @@ in
       {
         source = "${persist}/etc/NetworkManager/system-connections";
         target = "/etc/NetworkManager/system-connections";
-      }
-      {
-        source = "${persist}/${username}/.gitconfig";
-        target = "/home/${username}/.gitconfig";
       }
       {
         source = "${persist}/${username}/.ssh";
@@ -51,8 +47,6 @@ in
         target = "/home/${username}/books";
       }
     ];
-    links = [ ];
-    ensures = [ ];
   };
 
   # Define a user account.
@@ -66,11 +60,6 @@ in
       packages = with pkgs; [ ];
     };
   };
-
-  # PACKAGES
-  environment.systemPackages = with pkgs; [
-    kicad
-  ];
 
   # Configuration version and extra features
   system.stateVersion = "25.11";

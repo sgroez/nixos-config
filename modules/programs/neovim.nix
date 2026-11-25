@@ -2,25 +2,12 @@
   pkgs,
   lib,
   config,
-  myLib,
   ...
 }:
 let
   cfg = config.neovim;
-  inherit (lib)
-    mkEnableOption
-    mkOption
-    types
-    mkIf
-    concatMap
-    ;
 
-  usernames = lib.pipe config.users.users [
-    (lib.filterAttrs (name: userConfig: userConfig.isNormalUser))
-    lib.attrNames
-  ];
-
-  configFile = pkgs.writeText "init.lua" ''
+  configFile = pkgs.writeText "neovim.lua" ''
     -- Basic settings
     vim.o.number = true -- Enable line numbers
     vim.o.relativenumber = true -- Enable relative line numbers
@@ -46,17 +33,30 @@ let
 in
 {
   options.neovim = {
-    enable = mkEnableOption "enable neovim";
+    enable = lib.mkEnableOption "enable neovim";
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       neovim
     ];
-    # symlink config file to user home dir
-    systemd.tmpfiles.rules = concatMap (username: [
-      (myLib.persist.ensureDir "/home/${username}/.config/nvim" "0700" username "users")
-      (myLib.persist.symlink "${configFile}" "/home/${username}/.config/nvim/init.lua")
-    ]) usernames;
+    stateless.impermanence = lib.mkIf stateless.impermanence.enable {
+      ensures = [
+        {
+          path = "/etc/xdg/nvim";
+          permissions = {
+            mode = "0755";
+            owner = "root";
+            group = "root";
+          };
+        }
+      ];
+      links = [
+        {
+          source = "${configFile}";
+          target = "/etc/xdg/nvim/init.lua";
+        }
+      ];
+    };
   };
 }

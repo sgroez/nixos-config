@@ -2,23 +2,10 @@
   pkgs,
   lib,
   config,
-  myLib,
   ...
 }:
 let
   cfg = config.fuzzel;
-  inherit (lib)
-    mkEnableOption
-    mkOption
-    types
-    mkIf
-    concatMap
-    ;
-
-  usernames = lib.pipe config.users.users [
-    (lib.filterAttrs (name: userConfig: userConfig.isNormalUser))
-    lib.attrNames
-  ];
 
   configFile = pkgs.writeText "fuzzel.ini" ''
     [main]
@@ -43,9 +30,23 @@ in
       fuzzel
     ];
     # symlink config file to user home dir
-    systemd.tmpfiles.rules = concatMap (username: [
-      (myLib.persist.ensureDir "/home/${username}/.config/fuzzel" "0700" username "users")
-      (myLib.persist.symlink "${configFile}" "/home/${username}/.config/fuzzel/fuzzel.ini")
-    ]) usernames;
+    stateless.impermanence = lib.mkIf stateless.impermanence.enable {
+      ensures = [
+        {
+          path = "/etc/xdg/fuzzel";
+          permissions = {
+            mode = "0755";
+            owner = "root";
+            group = "root";
+          };
+        }
+      ];
+      links = [
+        {
+          source = "${configFile}";
+          target = "/etc/xdg/fuzzel/fuzzel.ini";
+        }
+      ];
+    };
   };
 }
