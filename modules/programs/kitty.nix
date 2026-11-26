@@ -6,14 +6,15 @@
 }:
 let
   cfg = config.kitty;
+  font = config.programs.design.fonts.main;
 
   configFile = pkgs.writeText "kitty.conf" ''
     confirm_os_window_close 0
-    font_family Unifont
+    font_family ${font.family}
     bold_font auto
     italic_font auto
     bold_italic_font auto
-    font_size 15.0
+    font_size ${lib.toString font.size}
     modify_font cell_width 60%
   '';
 in

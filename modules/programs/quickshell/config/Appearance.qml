@@ -7,26 +7,26 @@ JsonObject {
 
   component Fonts: JsonObject {
     property Font text: Font {
-      family: "Unifont"
+      family: "Sans Serif"
       style: "Regular"
-      pixelSize: 15
+      pixelSize: 10
     }
     property Font icon: Font {
-      family: "Material Symbols Rounded"
-      style: ""
-      pixelSize: 14
+      family: "Sans Serif"
+      style: "Regular"
+      pixelSize: 10
     }
   }
 
   component Colors: JsonObject {
     property Color main: Color {
-      hex: "#faba38"
+      hex: "#000000"
     }
     property Color darkAccent: Color {
-      hex: "#a06419"
+      hex: "#000000"
     }
     property Color brightAccent: Color {
-      hex: "#ffee4f"
+      hex: "#000000"
     }
   }
 

@@ -33,7 +33,7 @@ let
     -------------------
 
     hl.on("hyprland.start", function ()
-      hl.exec_cmd("quickshell")
+      hl.exec_cmd("quickshell -p /etc/xdg/quickshell")
     end)
 
 
@@ -49,8 +49,8 @@ let
             border_size = 2,
 
             col = {
-                active_border = { colors = {"rgb(faba38)", "rgb(ffee4f)"}, angle = 45 },
-                inactive_border = "rgb(a06419)",
+                active_border = { colors = {"rgb(${config.programs.design.colors.main})", "rgb(${config.programs.design.colors.brightAccent})"}, angle = 45 },
+                inactive_border = "rgb(${config.programs.design.colors.darkAccent})",
             },
         
 
@@ -60,7 +60,7 @@ let
         misc = {
           disable_hyprland_logo = true,
           disable_splash_rendering = true,
-          background_color = "rgb(000000)",
+          background_color = "rgb(${config.programs.design.colors.background})",
         },
 
         decoration = {

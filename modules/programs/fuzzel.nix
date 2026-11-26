@@ -6,18 +6,20 @@
 }:
 let
   cfg = config.fuzzel;
+  colors = config.programs.design.colors;
+  font = config.programs.design.fonts.main;
 
   configFile = pkgs.writeText "fuzzel.ini" ''
     [main]
-    font=Unifont:weight=regular:size=20
+    font=${font.family}:weight=${font.weight}:size=${ lib.toString font.size}
     [colors]
-    background=000000ff
-    text=faba38ff
-    match=ffee4fff
-    selection-match=ffee4fff
-    selection=a06419ff
-    selection-text=faba38ff
-    border=ffee4fff;
+    background=${colors.background}ff
+    text=${colors.main}ff
+    match=${colors.brightAccent}ff
+    selection-match=${colors.brightAccent}ff
+    selection=${colors.darkAccent}ff
+    selection-text=${colors.main}ff
+    border=${colors.brightAccent}ff;
   '';
 in
 {
